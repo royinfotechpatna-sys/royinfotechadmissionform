@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roy Infotech Computer Education</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--pr:#1a472a;--pr2:#2d6a4f;--ac:#f59e0b;--lt:#f0fdf4;--wh:#fff;--gy:#6b7280;--dk:#0f2419;--bd:#d1fae5;--sw:260px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito',sans-serif;background:var(--lt);color:var(--dk);}
+a{text-decoration:none;}
+
+/* ═══ ADMISSION PAGE ═══ */
+.adm-hdr{background:linear-gradient(135deg,var(--pr),var(--pr2));padding:18px 0;box-shadow:0 6px 20px rgba(0,0,0,0.2);}
+.adm-hdr-in{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.adm-hdr img{height:85px;width:auto;}
+.adm-hdr-r{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+.adm-contact{color:rgba(255,255,255,0.9);font-size:13px;text-align:right;line-height:1.7;}
+.admin-btn{background:var(--ac);color:#1a1a1a;padding:10px 22px;border-radius:10px;border:none;font-size:13px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.2s;display:flex;align-items:center;gap:7px;}
+.admin-btn:hover{background:#d97706;transform:translateY(-1px);}
+.adm-body{max-width:1100px;margin:0 auto;padding:22px 20px;}
+.form-card{background:var(--wh);border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,0.08);padding:32px;}
+.ftitle{font-family:'Playfair Display',serif;font-size:24px;color:var(--pr);margin-bottom:22px;padding-bottom:12px;border-bottom:3px solid var(--ac);display:inline-block;}
+.adm-badge{background:linear-gradient(135deg,var(--pr),var(--pr2));color:var(--wh);padding:11px 20px;border-radius:10px;font-size:16px;font-weight:800;display:inline-block;margin-bottom:20px;box-shadow:0 4px 12px rgba(26,71,42,0.3);}
+.fg{display:flex;flex-direction:column;}
+.fg label{font-weight:700;font-size:13px;color:var(--dk);margin-bottom:6px;}
+.fg input,.fg select{padding:11px 14px;border:2px solid var(--bd);border-radius:10px;font-size:14px;font-family:'Nunito',sans-serif;background:var(--lt);transition:all 0.3s;}
+.fg input:focus,.fg select:focus{outline:none;border-color:var(--ac);background:var(--wh);box-shadow:0 0 0 3px rgba(245,158,11,0.12);}
+.fg input[readonly]{background:#f9fafb;cursor:not-allowed;color:var(--gy);}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-bottom:18px;}
+.full{grid-column:1/-1;}
+.rrow{display:flex;gap:16px;margin-top:4px;flex-wrap:wrap;}
+.ri{display:flex;align-items:center;gap:6px;font-weight:600;font-size:14px;cursor:pointer;}
+.ri input[type=radio]{width:16px;height:16px;}
+.pay-box{background:linear-gradient(135deg,#fef3c7,#fde68a);border:3px dashed var(--ac);border-radius:14px;padding:22px;margin:20px 0;}
+.pay-box h3{font-family:'Playfair Display',serif;color:var(--dk);margin-bottom:14px;}
+.qr-row{display:flex;align-items:center;gap:22px;flex-wrap:wrap;}
+.qr-img{width:170px;height:170px;background:var(--wh);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.1);overflow:hidden;padding:6px;flex-shrink:0;}
+.qr-img img{width:100%;height:100%;object-fit:contain;}
+.pay-info p{margin:5px 0;font-size:13px;}
+.brow{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;}
+.bn{padding:13px 30px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.2s;}
+.bn-p{background:linear-gradient(135deg,var(--pr),var(--pr2));color:var(--wh);box-shadow:0 4px 14px rgba(26,71,42,0.3);}
+.bn-p:hover{transform:translateY(-2px);}
+.bn-s{background:var(--wh);color:var(--pr);border:2px solid var(--pr);}
+.spinner{display:none;border:4px solid var(--bd);border-top:4px solid var(--pr);border-radius:50%;width:36px;height:36px;animation:spin 1s linear infinite;margin:16px auto;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.msg-ok{display:none;background:#d1fae5;color:#065f46;padding:12px;border-radius:10px;margin:12px 0;text-align:center;font-weight:700;}
+.msg-er{display:none;background:#fee2e2;color:#991b1b;padding:12px;border-radius:10px;margin:12px 0;text-align:center;font-weight:700;}
+
+/* ═══ RECEIPT (Print-safe) ═══ */
+#rcpArea{display:none;background:var(--wh);padding:30px;border:3px solid var(--pr);margin-top:22px;border-radius:14px;}
+.rcp-hdr{text-align:center;border-bottom:2px solid var(--pr);padding-bottom:16px;margin-bottom:16px;}
+.rcp-hdr img{max-height:85px;width:auto;}
+.rcp-badge{background:var(--pr);color:var(--wh);display:inline-block;padding:5px 20px;border-radius:20px;font-size:13px;font-weight:700;margin-top:10px;}
+.rcp-layout{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;margin-bottom:14px;}
+.rcp-photo{width:100px;height:120px;border-radius:10px;object-fit:cover;border:3px solid var(--bd);}
+.rcp-ph-box{width:100px;height:120px;border-radius:10px;border:3px solid var(--bd);background:var(--lt);display:flex;align-items:center;justify-content:center;font-size:44px;}
+.rcp-info{flex:1;}
+.rrow2{display:flex;padding:8px 0;border-bottom:1px solid var(--bd);}
+.rl{font-weight:700;width:155px;color:var(--dk);font-size:12px;flex-shrink:0;}
+.rv{flex:1;color:var(--gy);font-size:12px;}
+.fee-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0;}
+.fg-item{padding:12px;border-radius:8px;text-align:center;}
+.fg-tot{background:#fef3c7;}.fg-paid{background:#d1fae5;}.fg-dues{background:#fee2e2;}
+.fg-item .fgl{font-size:11px;font-weight:700;color:var(--gy);}
+.fg-item .fgv{font-size:18px;font-weight:800;margin-top:4px;}
+.fg-tot .fgv{color:#92400e;}.fg-paid .fgv{color:#065f46;}.fg-dues .fgv{color:#991b1b;}
+.rcp-footer{margin-top:20px;padding-top:14px;border-top:2px solid var(--pr);}
+.sign-row{display:flex;justify-content:space-between;margin-top:22px;align-items:flex-end;}
+.sbox{text-align:center;font-size:12px;}
+.sline{border-top:1px solid #999;width:120px;margin:0 auto 4px;}
+
+/* ═══ SIGNATURE STYLES ═══ */
+.sign-img-box{width:120px;height:50px;display:flex;align-items:center;justify-content:center;margin:0 auto 4px;}
+.sign-img-box img{max-width:120px;max-height:50px;object-fit:contain;}
+
+/* Sign upload preview in settings */
+.sign-preview-wrap{margin-top:14px;padding:14px;background:var(--lt);border-radius:12px;border:2px dashed var(--bd);text-align:center;}
+.sign-preview-wrap img{max-width:200px;max-height:70px;object-fit:contain;border:1px solid var(--bd);border-radius:6px;padding:4px;background:#fff;}
+.sign-preview-wrap .no-sign{color:var(--gy);font-size:13px;font-weight:600;}
+
+/* ═══ LOGIN OVERLAY ═══ */
+#loginOv{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:3000;align-items:center;justify-content:center;}
+#loginOv.open{display:flex;}
+.lb{background:var(--wh);border-radius:20px;padding:38px;width:370px;max-width:95vw;box-shadow:0 25px 70px rgba(0,0,0,0.4);animation:up 0.35s ease;position:relative;}
+@keyframes up{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.lb-logo{text-align:center;margin-bottom:18px;}
+.lb-logo img{max-width:200px;}
+.lb h2{text-align:center;color:var(--pr);font-size:19px;font-weight:800;margin-bottom:4px;}
+.lb .sub{text-align:center;color:var(--gy);font-size:12px;margin-bottom:20px;}
+.lb-f{margin-bottom:14px;}
+.lb-f label{display:block;font-weight:700;font-size:12px;color:var(--pr);margin-bottom:5px;}
+.lb-f input{width:100%;padding:11px 13px;border:2px solid var(--bd);border-radius:10px;font-size:14px;font-family:'Nunito',sans-serif;background:var(--lt);}
+.lb-f input:focus{outline:none;border-color:var(--ac);}
+.lb-btn{width:100%;padding:12px;background:linear-gradient(135deg,var(--pr),var(--pr2));color:var(--wh);border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:5px;}
+.lb-close{position:absolute;top:12px;right:12px;background:#fee2e2;border:none;border-radius:7px;width:28px;height:28px;cursor:pointer;font-size:13px;font-weight:700;color:#991b1b;}
+.lb-err{background:#fee2e2;color:#991b1b;padding:10px;border-radius:8px;text-align:center;font-size:12px;font-weight:700;margin-top:10px;display:none;}
+
+/* ═══ ADMIN PANEL ═══ */
+#adminPanel{display:none;}
+.ap-lay{display:flex;min-height:100vh;}
+.ap-sb{width:var(--sw);background:linear-gradient(180deg,var(--dk),var(--pr));color:var(--wh);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:100;transition:transform 0.3s;}
+.ap-sb-logo{padding:16px;border-bottom:1px solid rgba(255,255,255,0.1);text-align:center;}
+.ap-sb-logo img{max-width:145px;}
+.nl{padding:7px 16px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,0.35);margin-top:8px;}
+.ni{display:flex;align-items:center;gap:10px;padding:11px 16px;cursor:pointer;transition:all 0.2s;border-left:3px solid transparent;font-size:13px;font-weight:700;color:rgba(255,255,255,0.85);}
+.ni:hover{background:rgba(255,255,255,0.1);border-left-color:var(--ac);}
+.ni.active{background:rgba(245,158,11,0.18);border-left-color:var(--ac);color:var(--ac);}
+.ni .ico{font-size:16px;width:18px;text-align:center;}
+.ap-adm-link{margin:12px;padding:11px 10px;background:rgba(245,158,11,0.2);border-radius:10px;color:var(--ac);font-weight:700;font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:all 0.2s;}
+.ap-adm-link:hover{background:rgba(245,158,11,0.35);}
+.ap-top{background:var(--wh);padding:13px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,0.07);position:sticky;top:0;z-index:50;}
+.ap-top h1{font-size:18px;font-weight:800;color:var(--pr);}
+.ap-main{margin-left:var(--sw);flex:1;min-width:0;}
+.ap-pg{display:none;padding:20px 24px;}
+.ap-pg.active{display:block;}
+.lo-btn{padding:7px 16px;background:#fee2e2;color:#991b1b;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;}
+
+/* Stats */
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-bottom:20px;}
+.sc{background:var(--wh);border-radius:14px;padding:18px;box-shadow:0 3px 12px rgba(0,0,0,0.06);border-left:5px solid transparent;transition:transform 0.2s;}
+.sc:hover{transform:translateY(-2px);}
+.sc-g{border-left-color:#22c55e;}.sc-r{border-left-color:#ef4444;}.sc-a{border-left-color:#f59e0b;}.sc-b{border-left-color:#3b82f6;}
+.sc-ico{font-size:26px;margin-bottom:7px;}.sc-val{font-size:24px;font-weight:800;color:var(--pr);}.sc-lbl{font-size:11px;color:var(--gy);font-weight:700;margin-top:2px;}
+
+/* Cards & Tables */
+.card{background:var(--wh);border-radius:14px;box-shadow:0 3px 12px rgba(0,0,0,0.06);overflow:hidden;margin-bottom:20px;}
+.ch{padding:14px 18px;border-bottom:2px solid var(--bd);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.ch h3{font-size:14px;font-weight:800;color:var(--pr);}
+.srch{padding:8px 12px;border:2px solid var(--bd);border-radius:9px;font-size:13px;font-family:'Nunito',sans-serif;width:210px;}
+.srch:focus{outline:none;border-color:var(--ac);}
+.fb{display:flex;gap:7px;flex-wrap:wrap;padding:10px 18px;background:#f9fafb;border-bottom:1px solid var(--bd);}
+.fbtn{padding:5px 13px;border-radius:18px;border:2px solid var(--bd);background:var(--wh);font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.2s;color:var(--gy);}
+.fbtn.on,.fbtn:hover{background:var(--pr);color:var(--wh);border-color:var(--pr);}
+.tbl{width:100%;border-collapse:collapse;font-size:12px;}
+.tbl th{padding:10px 13px;text-align:left;font-weight:800;font-size:11px;text-transform:uppercase;color:var(--gy);background:#f9fafb;white-space:nowrap;}
+.tbl td{padding:11px 13px;border-bottom:1px solid #f3f4f6;vertical-align:middle;}
+.tbl tr:hover td{background:#fafafa;}
+.badge{padding:3px 9px;border-radius:18px;font-size:11px;font-weight:700;}
+.b-paid{background:#d1fae5;color:#065f46;}.b-part{background:#fef3c7;color:#92400e;}.b-dues{background:#fee2e2;color:#991b1b;}
+.ab{padding:5px 10px;border-radius:7px;border:none;font-size:11px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.2s;white-space:nowrap;margin:1px;}
+.av{background:#dbeafe;color:#1d4ed8;}.av:hover{background:#bfdbfe;}
+.ap2{background:#d1fae5;color:#065f46;}.ap2:hover{background:#a7f3d0;}
+.ad{background:#fee2e2;color:#991b1b;}.ad:hover{background:#fca5a5;}
+.as{background:#ede9fe;color:#5b21b6;}.as:hover{background:#ddd6fe;}
+.ae{background:#fef3c7;color:#92400e;}.ae:hover{background:#fde68a;}
+
+/* Modals */
+.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;align-items:center;justify-content:center;padding:15px;}
+.mo.open{display:flex;}
+.md{background:var(--wh);border-radius:18px;padding:24px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.25);animation:up 0.3s ease;position:relative;}
+.md-lg{max-width:700px;}.md-sm{max-width:430px;}
+.mhd{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--bd);}
+.mhd h3{font-size:16px;font-weight:800;color:var(--pr);}
+.mcl{background:#fee2e2;border:none;border-radius:7px;width:28px;height:28px;cursor:pointer;font-size:13px;font-weight:700;color:#991b1b;}
+
+/* Student detail */
+.sd-top{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;}
+.sd-img{width:85px;height:105px;border-radius:10px;object-fit:cover;border:3px solid var(--bd);}
+.sd-ph{width:85px;height:105px;border-radius:10px;background:var(--lt);border:3px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:38px;}
+.fee-sum{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0;background:var(--lt);border-radius:10px;padding:10px;}
+.fsi{padding:10px;border-radius:8px;text-align:center;}
+.fsi strong{display:block;font-size:17px;font-weight:800;}
+.fsi span{font-size:11px;font-weight:700;color:var(--gy);}
+.fsi-t{background:#fef3c7;}.fsi-t strong{color:#92400e;}
+.fsi-p{background:#d1fae5;}.fsi-p strong{color:#065f46;}
+.fsi-d{background:#fee2e2;}.fsi-d strong{color:#991b1b;}
+.phi{display:flex;justify-content:space-between;align-items:center;padding:9px 10px;background:#f9fafb;border-radius:8px;margin-bottom:7px;font-size:12px;}
+.phi-dt{color:var(--gy);font-size:11px;}.phi-am{font-weight:800;color:#065f46;}
+
+/* Pay form */
+.pfg{margin-bottom:12px;}
+.pfg label{display:block;font-weight:700;font-size:12px;color:var(--pr);margin-bottom:5px;}
+.pfg input,.pfg select,.pfg textarea{width:100%;padding:10px 12px;border:2px solid var(--bd);border-radius:9px;font-size:13px;font-family:'Nunito',sans-serif;background:var(--lt);}
+.pfg input:focus,.pfg select:focus{outline:none;border-color:var(--ac);}
+
+/* Slip */
+.slip{border:2px solid var(--pr);border-radius:12px;padding:20px;max-width:390px;margin:0 auto;}
+.slip-hd{text-align:center;border-bottom:2px dashed var(--pr);padding-bottom:12px;margin-bottom:12px;}
+.slip-hd img{max-width:190px;height:auto;}
+.slip-ttl{background:var(--pr);color:var(--wh);text-align:center;padding:5px;border-radius:6px;font-weight:700;font-size:12px;margin:10px 0;}
+.slip-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dotted #ccc;font-size:12px;}
+.slip-row span:first-child{color:var(--gy);font-weight:600;}
+.slip-row span:last-child{font-weight:700;}
+.slip-amt-box{background:linear-gradient(135deg,var(--pr),var(--pr2));color:var(--wh);text-align:center;border-radius:9px;padding:11px;margin:11px 0;}
+.slip-amt-box .sav{font-size:24px;font-weight:800;}
+.slip-amt-box .sal{font-size:11px;opacity:0.85;}
+.slip-ft{text-align:center;margin-top:12px;font-size:10px;color:var(--gy);}
+.slip-signs{display:flex;justify-content:space-between;margin-top:18px;margin-bottom:6px;align-items:flex-end;}
+.ss{text-align:center;font-size:11px;}.ssl{border-top:1px solid #aaa;width:85px;margin:0 auto 4px;}
+
+/* Chart */
+.cbr{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.cbl{width:85px;font-size:11px;font-weight:700;color:var(--gy);text-align:right;}
+.cbtr{flex:1;background:var(--lt);border-radius:20px;height:24px;overflow:hidden;}
+.cbf{height:100%;background:linear-gradient(90deg,var(--pr),var(--pr2));border-radius:20px;display:flex;align-items:center;padding-left:8px;min-width:28px;}
+.cbf span{font-size:10px;font-weight:700;color:white;white-space:nowrap;}
+
+/* Bulk upload */
+.bulk-info{background:#fef3c7;border:2px solid var(--ac);border-radius:10px;padding:14px;margin-bottom:16px;font-size:13px;line-height:1.7;}
+.bulk-info code{background:#fff8e1;padding:2px 7px;border-radius:4px;font-size:12px;font-family:'Courier New',monospace;border:1px solid #fde68a;}
+#bulkTA{width:100%;padding:12px;border:2px solid var(--bd);border-radius:10px;font-size:12px;font-family:'Courier New',monospace;resize:vertical;background:var(--lt);min-height:120px;}
+.bulk-prev-tbl{width:100%;border-collapse:collapse;font-size:12px;}
+.bulk-prev-tbl th{background:#f9fafb;padding:8px 10px;text-align:left;font-size:11px;font-weight:800;color:var(--gy);border-bottom:2px solid var(--bd);}
+.bulk-prev-tbl td{padding:7px 10px;border-bottom:1px solid #f3f4f6;}
+.bulk-prev-tbl tr:hover td{background:#fafafa;}
+
+/* ═══ PRINT STYLES ═══ */
+@media print{
+  body.print-rcp > *{ display:none !important; }
+  body.print-rcp #admPage{ display:block !important; }
+  body.print-rcp #admPage .adm-hdr{ display:none !important; }
+  body.print-rcp #admPage .adm-body .form-card{ display:none !important; }
+  body.print-rcp #admPage .adm-body #rcpArea{ display:block !important; }
+  body.print-rcp #rcpArea .nopr{ display:none !important; }
+  body.print-slip > *{ display:none !important; }
+  body.print-slip #slipPrintArea{ display:block !important; }
+}
+
+#slipPrintArea{ display:none; }
+
+@media(max-width:768px){
+  .ap-sb{transform:translateX(-100%);}.ap-sb.open{transform:translateX(0);}
+  .ap-main{margin-left:0;}.ap-pg{padding:14px;}
+  .fee-sum{grid-template-columns:1fr;}.sg{grid-template-columns:1fr 1fr;}
+  .fgrid{grid-template-columns:1fr;}.sd-top{flex-direction:column;}
+  #mBtn{display:block !important;}
+}
+</style>
+</head>
+<body>
+
+<div id="slipPrintArea"></div>
+
+<!-- ═══════════ ADMISSION PAGE ═══════════ -->
+<div id="admPage">
+  <div class="adm-hdr">
+    <div class="adm-hdr-in">
+      <img src="roy_templete1.png" alt="Roy Infotech">
+      <div class="adm-hdr-r">
+        <div class="adm-contact">📞 9060180354<br>📧 royinfotech.patna@gmail.com</div>
+        <button class="admin-btn" onclick="openLogin()">🔐 Admin Login</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="adm-body">
+    <div class="form-card">
+      <h2 class="ftitle">Admission Form</h2>
+      <div class="adm-badge" id="admNo">Admission No: RI-2026-0001</div>
+      <form id="admForm" onsubmit="submitAdm(event)">
+        <div class="fgrid">
+          <div class="fg"><label>Student Name *</label><input type="text" id="f_name" required placeholder="Full name"></div>
+          <div class="fg"><label>Father's Name *</label><input type="text" id="f_father" required placeholder="Father's name"></div>
+          <div class="fg"><label>Mother's Name *</label><input type="text" id="f_mother" required placeholder="Mother's name"></div>
+          <div class="fg">
+            <label>Gender *</label>
+            <div class="rrow">
+              <label class="ri"><input type="radio" name="gender" value="Male" required> Male</label>
+              <label class="ri"><input type="radio" name="gender" value="Female"> Female</label>
+              <label class="ri"><input type="radio" name="gender" value="Other"> Other</label>
+            </div>
+          </div>
+          <div class="fg"><label>Date of Birth *</label><input type="date" id="f_dob" required></div>
+          <div class="fg"><label>Mobile Number *</label><input type="text" id="f_mobile" pattern="[0-9]{10}" placeholder="10 digit number" required></div>
+          <div class="fg">
+            <label>Course *</label>
+            <select id="f_course" required>
+              <option value="">Select Course</option>
+              <option>ADCA</option><option>DCA</option><option>DTP</option><option>MIS</option>
+              <option>CFA</option><option>Excel Advanced</option><option>Tally</option>
+              <option>HTML</option><option>CSS</option><option>Typing</option><option>Photoshop</option><option>Other</option>
+            </select>
+          </div>
+          <div class="fg"><label>Course Fee (₹) *</label><input type="number" id="f_fee" required placeholder="Total fee" min="0" oninput="calcDues('f_fee','f_paid','f_dues')"></div>
+          <div class="fg"><label>Paid Amount (₹) *</label><input type="number" id="f_paid" required placeholder="Amount paid today" min="0" oninput="calcDues('f_fee','f_paid','f_dues')"></div>
+          <div class="fg"><label>Dues Amount (₹)</label><input type="text" id="f_dues" readonly placeholder="Auto-calculated"></div>
+          <div class="fg full"><label>Complete Address *</label><input type="text" id="f_addr" required placeholder="Village/Town, District, State"></div>
+          <div class="fg"><label>Student Photo</label><input type="file" id="f_photo" accept="image/*"></div>
+          <div class="fg"><label>Payment Slip *</label><input type="file" id="f_slip" accept="image/*" required></div>
+        </div>
+        <div class="pay-box">
+          <h3>💳 Payment Details</h3>
+          <div class="qr-row">
+            <div class="qr-img"><img src="QR.jpeg" alt="QR" onerror="this.parentElement.innerHTML='<div style=&quot;text-align:center;color:#aaa;font-size:40px;&quot;>📱</div>'"></div>
+            <div class="pay-info">
+              <p><strong>UPI ID:</strong> royinfotech@paytm</p>
+              <p><strong>Google Pay/PhonePe:</strong> 9060180354</p>
+              <p><strong>Bank:</strong> State Bank of India</p>
+              <p><strong>A/C No:</strong> 20369853359</p>
+              <p><strong>IFSC:</strong> SBIN0006380</p>
+              <p style="margin-top:10px;color:#b45309;font-weight:700;">⚠️ Payment ke baad slip upload karo</p>
+            </div>
+          </div>
+        </div>
+        <div class="spinner" id="sp"></div>
+        <div class="msg-ok" id="msgOk">✅ Admission submitted successfully!</div>
+        <div class="msg-er" id="msgEr"></div>
+        <div class="brow">
+          <button type="submit" class="bn bn-p">📤 Submit Admission</button>
+          <button type="button" class="bn bn-s" onclick="resetAdm()">🔄 Clear Form</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- RECEIPT -->
+    <div id="rcpArea">
+      <div class="rcp-hdr">
+        <img src="roy_templete1.png" alt="Roy Infotech">
+        <div style="font-size:12px;color:var(--gy);margin-top:6px;">Station Road, Bankaghat, Kachchi Dargah, Patna | 📞 9060180354</div>
+        <div class="rcp-badge">ADMISSION RECEIPT</div>
+      </div>
+      <div id="rcpBody"></div>
+      <div class="rcp-footer">
+        <div class="sign-row">
+          <div class="sbox"><div class="sline"></div>Student Signature</div>
+          <div class="sbox" id="rcpAuthSign">
+            <div class="sline"></div>Authorized Signature
+          </div>
+        </div>
+        <p style="margin-top:16px;font-size:11px;color:var(--gy);text-align:center;">Computer generated receipt. Please keep for future reference.</p>
+      </div>
+      <div class="brow nopr" style="justify-content:center;margin-top:16px;">
+        <button class="bn bn-p" onclick="printReceipt()">🖨️ Print Receipt</button>
+        <button class="bn bn-s" onclick="closeReceipt()">✕ Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ LOGIN OVERLAY ═══════════ -->
+<div id="loginOv">
+  <div class="lb">
+    <button class="lb-close" onclick="closeLogin()">✕</button>
+    <div class="lb-logo"><img src="roy_templete1.png" alt="Roy Infotech"></div>
+    <h2>Admin Login</h2>
+    <p class="sub">Roy Infotech Computer Education</p>
+    <div class="lb-f"><label>Username</label><input type="text" id="lb_user" placeholder="Enter username" autocomplete="off"></div>
+    <div class="lb-f"><label>Password</label><input type="password" id="lb_pass" placeholder="Enter password"></div>
+    <button class="lb-btn" onclick="doLogin()">🔐 Login to Admin Panel</button>
+    <div class="lb-err" id="lb_err">❌ Invalid username or password!</div>
+    <p style="text-align:center;margin-top:12px;font-size:11px;color:var(--gy);">Default: admin / royinfotech@2026</p>
+  </div>
+</div>
+
+<!-- ═══════════ ADMIN PANEL ═══════════ -->
+<div id="adminPanel">
+  <div class="ap-lay">
+    <aside class="ap-sb" id="apSb">
+      <div class="ap-sb-logo"><img src="roy_templete1.png" alt="Roy Infotech"></div>
+      <nav>
+        <div class="nl">Main</div>
+        <div class="ni active" id="nav_dashboard" onclick="apNav('dashboard')"><span class="ico">📊</span>Dashboard</div>
+        <div class="ni" id="nav_students" onclick="apNav('students')"><span class="ico">👨‍🎓</span>All Students</div>
+        <div class="ni" id="nav_payments" onclick="apNav('payments')"><span class="ico">💰</span>Payments</div>
+        <div class="nl">Tools</div>
+        <div class="ni" id="nav_dues" onclick="apNav('dues')"><span class="ico">⚠️</span>Dues Tracker</div>
+        <div class="ni" id="nav_bulk" onclick="apNav('bulk')"><span class="ico">📥</span>Bulk Upload</div>
+        <div class="ni" id="nav_settings" onclick="apNav('settings')"><span class="ico">⚙️</span>Settings</div>
+        <div class="ap-adm-link" onclick="goAdm()"><span>➕</span>New Admission Form</div>
+      </nav>
+    </aside>
+
+    <div class="ap-main">
+      <div class="ap-top">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <button id="mBtn" onclick="document.getElementById('apSb').classList.toggle('open')" style="display:none;background:none;border:none;font-size:22px;cursor:pointer;">☰</button>
+          <h1 id="apTitle">Dashboard</h1>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="font-size:12px;color:var(--gy);">👤 <span id="apUsr">Admin</span></span>
+          <button class="lo-btn" onclick="doLogout()">🚪 Logout</button>
+        </div>
+      </div>
+
+      <!-- DASHBOARD -->
+      <div class="ap-pg active" id="pg_dashboard">
+        <div class="sg">
+          <div class="sc sc-g"><div class="sc-ico">👨‍🎓</div><div class="sc-val" id="d1">0</div><div class="sc-lbl">Total Students</div></div>
+          <div class="sc sc-b"><div class="sc-ico">💵</div><div class="sc-val" id="d2">₹0</div><div class="sc-lbl">Total Collected</div></div>
+          <div class="sc sc-r"><div class="sc-ico">⏳</div><div class="sc-val" id="d3">₹0</div><div class="sc-lbl">Total Dues</div></div>
+          <div class="sc sc-a"><div class="sc-ico">📚</div><div class="sc-val" id="d4">0</div><div class="sc-lbl">Courses Running</div></div>
+        </div>
+        <div class="card">
+          <div class="ch"><h3>📋 Recent Admissions</h3><span style="font-size:12px;color:var(--gy);">Last 5</span></div>
+          <div style="overflow-x:auto;"><table class="tbl"><thead><tr><th>Adm No</th><th>Name</th><th>Course</th><th>Fee</th><th>Paid</th><th>Dues</th><th>Action</th></tr></thead><tbody id="recTbl"></tbody></table></div>
+        </div>
+        <div class="card">
+          <div class="ch"><h3>📊 Course-wise Students</h3></div>
+          <div style="padding:16px;" id="chart"></div>
+        </div>
+      </div>
+
+      <!-- STUDENTS -->
+      <div class="ap-pg" id="pg_students">
+        <div class="card">
+          <div class="ch"><h3>👨‍🎓 All Students</h3><input class="srch" id="srSt" placeholder="🔍 Name/Mobile/Course..." oninput="fSt()"></div>
+          <div class="fb">
+            <button class="fbtn on" onclick="setCF('all',this)">All</button>
+            <button class="fbtn" onclick="setCF('ADCA',this)">ADCA</button>
+            <button class="fbtn" onclick="setCF('DCA',this)">DCA</button>
+            <button class="fbtn" onclick="setCF('DTP',this)">DTP</button>
+            <button class="fbtn" onclick="setCF('Tally',this)">Tally</button>
+            <button class="fbtn" onclick="setCF('Excel Advanced',this)">Excel</button>
+            <button class="fbtn" onclick="setCF('Photoshop',this)">Photoshop</button>
+            <button class="fbtn" onclick="setCF('Typing',this)">Typing</button>
+          </div>
+          <div style="overflow-x:auto;"><table class="tbl"><thead><tr><th>Adm No</th><th>Photo</th><th>Name</th><th>Father</th><th>Mobile</th><th>Course</th><th>Status</th><th>Actions</th></tr></thead><tbody id="stTbl"></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- PAYMENTS -->
+      <div class="ap-pg" id="pg_payments">
+        <div class="sg">
+          <div class="sc sc-g"><div class="sc-ico">✅</div><div class="sc-val" id="p1">0</div><div class="sc-lbl">Fully Paid</div></div>
+          <div class="sc sc-a"><div class="sc-ico">⚡</div><div class="sc-val" id="p2">0</div><div class="sc-lbl">Partial Payment</div></div>
+          <div class="sc sc-b"><div class="sc-ico">💰</div><div class="sc-val" id="p3">₹0</div><div class="sc-lbl">Total Received</div></div>
+        </div>
+        <div class="card">
+          <div class="ch"><h3>💰 Payment Records</h3><input class="srch" id="srPay" placeholder="🔍 Search..." oninput="fPay()"></div>
+          <div style="overflow-x:auto;"><table class="tbl"><thead><tr><th>Adm No</th><th>Name</th><th>Course</th><th>Total</th><th>Paid</th><th>Dues</th><th>Status</th><th>Actions</th></tr></thead><tbody id="payTbl"></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- DUES -->
+      <div class="ap-pg" id="pg_dues">
+        <div class="card">
+          <div class="ch"><h3>⚠️ Dues Tracker</h3><span style="font-size:13px;color:var(--ac);font-weight:800;" id="dTotal">Total: ₹0</span></div>
+          <div style="overflow-x:auto;"><table class="tbl"><thead><tr><th>Adm No</th><th>Name</th><th>Mobile</th><th>Course</th><th>Total</th><th>Paid</th><th>Dues</th><th>Action</th></tr></thead><tbody id="duesTbl"></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- BULK UPLOAD PAGE -->
+      <div class="ap-pg" id="pg_bulk">
+        <div class="card">
+          <div class="ch"><h3>📥 Bulk Upload — Purane Admissions</h3></div>
+          <div style="padding:20px;">
+            <div class="bulk-info">
+              <strong>📋 Kaise use karo:</strong><br>
+              Ek row = ek student. Format:<br>
+              <code>Name, Father Name, Mother Name, Gender, DOB (YYYY-MM-DD), Mobile, Course, Total Fee, Paid Amount</code><br><br>
+              <strong>Example:</strong><br>
+              <code>Rahul Kumar, Ramesh Kumar, Sunita Devi, Male, 2005-03-15, 9876543210, DCA, 5000, 3000</code><br>
+              <code>Priya Singh, Suresh Singh, Meena Devi, Female, 2004-07-22, 9765432109, ADCA, 8000, 8000</code><br><br>
+              ⚠️ <strong>Note:</strong> Pehle line header mat likhna. Seedha data likhna. DOB format: YYYY-MM-DD
+            </div>
+            <div class="pfg">
+              <label>📝 Data Paste Karo (CSV Format):</label>
+              <textarea id="bulkTA" rows="8" placeholder="Rahul Kumar, Ramesh Kumar, Sunita Devi, Male, 2005-03-15, 9876543210, DCA, 5000, 3000&#10;Priya Singh, Suresh Singh, Meena Devi, Female, 2004-07-22, 9765432109, ADCA, 8000, 8000"></textarea>
+            </div>
+            <div style="text-align:center;margin:10px 0;color:var(--gy);font-weight:700;font-size:13px;">── YA ──</div>
+            <div class="pfg">
+              <label>📁 CSV / TXT File Upload Karo:</label>
+              <input type="file" id="bulkFile" accept=".csv,.txt" style="padding:8px;border:2px solid var(--bd);border-radius:8px;font-size:13px;width:100%;background:var(--lt);" onchange="loadBulkFile()">
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
+              <button onclick="parseBulk()" style="padding:10px 22px;background:#3b82f6;color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;">🔍 Preview Data</button>
+              <button onclick="clearBulk()" style="padding:10px 22px;background:#f3f4f6;color:var(--gy);border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;">🗑️ Clear</button>
+            </div>
+            <div id="bulkMsg" style="display:none;padding:12px;border-radius:9px;font-size:13px;font-weight:700;margin-bottom:14px;"></div>
+            <div id="bulkPreviewWrap" style="display:none;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+                <h4 style="font-size:13px;font-weight:800;color:var(--pr);">👁 Preview: <span id="bulkCount">0</span> students</h4>
+                <button onclick="importBulk()" style="padding:10px 26px;background:linear-gradient(135deg,var(--pr),var(--pr2));color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;">✅ Import All Students</button>
+              </div>
+              <div style="overflow-x:auto;max-height:320px;overflow-y:auto;border:1px solid var(--bd);border-radius:10px;">
+                <table class="bulk-prev-tbl" id="bulkPrevTbl">
+                  <thead><tr><th>#</th><th>Name</th><th>Father</th><th>Gender</th><th>Mobile</th><th>Course</th><th>Fee</th><th>Paid</th><th>Dues</th><th>Status</th></tr></thead>
+                  <tbody id="bulkPrevBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="ap-pg" id="pg_settings">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:20px;">
+
+          <!-- Account Settings -->
+          <div class="card">
+            <div class="ch"><h3>🔐 Account Settings</h3></div>
+            <div style="padding:20px;">
+              <div class="pfg"><label>Admin Username</label><input type="text" id="sUsr" placeholder="New username"></div>
+              <div class="pfg"><label>Current Password</label><input type="password" id="sCur" placeholder="Current password"></div>
+              <div class="pfg"><label>New Password</label><input type="password" id="sNew" placeholder="New password (min 6 chars)"></div>
+              <div class="pfg"><label>Confirm Password</label><input type="password" id="sCon" placeholder="Confirm password"></div>
+              <button onclick="saveSet()" style="padding:10px 22px;background:var(--pr);color:var(--wh);border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;">💾 Save Changes</button>
+              <div id="setMsg" style="margin-top:10px;display:none;padding:10px;border-radius:8px;font-size:12px;font-weight:700;"></div>
+            </div>
+          </div>
+
+          <!-- ════ AUTHORIZED SIGNATURE UPLOAD ════ -->
+          <div class="card">
+            <div class="ch"><h3>✍️ Authorized Signature</h3></div>
+            <div style="padding:20px;">
+              <p style="font-size:13px;color:var(--gy);margin-bottom:14px;line-height:1.6;">
+                Yahan apni authorized signature ki image upload karo.<br>
+                Yeh signature automatically <strong>har receipt</strong> aur <strong>payment slip</strong> mein appear hogi.
+              </p>
+              <div class="pfg">
+                <label>📷 Signature Image Upload Karo (PNG/JPG — White/Transparent Background preferred)</label>
+                <input type="file" id="signFile" accept="image/*" onchange="previewSign(this)"
+                  style="padding:8px;border:2px solid var(--bd);border-radius:8px;font-size:13px;width:100%;background:var(--lt);">
+              </div>
+
+              <!-- Live Preview -->
+              <div class="sign-preview-wrap" id="signPreviewWrap">
+                <div id="signPreviewInner">
+                  <span class="no-sign">📝 Koi signature upload nahi hai abhi</span>
+                </div>
+              </div>
+
+              <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;">
+                <button onclick="saveSign()" style="padding:10px 22px;background:linear-gradient(135deg,var(--pr),var(--pr2));color:var(--wh);border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;">✅ Save Signature</button>
+                <button onclick="removeSign()" style="padding:10px 22px;background:#fee2e2;color:#991b1b;border:2px solid #fca5a5;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;">🗑️ Remove Signature</button>
+              </div>
+              <div id="signMsg" style="margin-top:10px;display:none;padding:10px;border-radius:8px;font-size:12px;font-weight:700;"></div>
+
+              <!-- Current saved signature info -->
+              <div id="signStatus" style="margin-top:12px;padding:10px;background:var(--lt);border-radius:8px;font-size:12px;color:var(--gy);font-weight:600;"></div>
+            </div>
+          </div>
+
+          <!-- Google Sheets & Danger Zone -->
+          <div class="card">
+            <div class="ch"><h3>🔗 Google Sheets & Other</h3></div>
+            <div style="padding:20px;">
+              <h4 style="color:var(--pr);margin-bottom:10px;font-size:13px;">📊 Google Sheets URL</h4>
+              <div class="pfg"><input type="text" id="sUrl" placeholder="Paste Google Apps Script URL here"></div>
+              <button onclick="saveUrl()" style="padding:10px 22px;background:#3b82f6;color:var(--wh);border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;">🔗 Save URL</button>
+              <hr style="margin:20px 0;border-color:var(--bd);">
+              <button onclick="clearAll()" style="padding:10px 22px;background:#fee2e2;color:#991b1b;border:2px solid #fca5a5;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;">🗑️ Clear All Student Data</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STUDENT DETAIL MODAL ═══ -->
+<div class="mo" id="moSt">
+  <div class="md md-lg">
+    <div class="mhd"><h3>👤 Student Details</h3><button class="mcl" onclick="closeM('moSt')">✕</button></div>
+    <div id="moStBody"></div>
+    <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;">
+      <button class="ab ap2" style="padding:9px 16px;font-size:12px;" onclick="openPayM(curAdm)">💰 Add Payment</button>
+      <button class="ab ae" style="padding:9px 16px;font-size:12px;" onclick="openEditM(curAdm)">✏️ Edit Details</button>
+      <button class="ab as" style="padding:9px 16px;font-size:12px;" onclick="showSlip(curAdm)">🧾 Print Slip</button>
+      <button class="ab ad" style="padding:9px 16px;font-size:12px;" onclick="delSt(curAdm)">🗑️ Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EDIT STUDENT MODAL ═══ -->
+<div class="mo" id="moEdit">
+  <div class="md md-lg">
+    <div class="mhd"><h3>✏️ Edit Student Details</h3><button class="mcl" onclick="closeM('moEdit')">✕</button></div>
+    <div class="fgrid">
+      <div class="fg"><label>Student Name *</label><input type="text" id="e_name" placeholder="Full name"></div>
+      <div class="fg"><label>Father's Name *</label><input type="text" id="e_father" placeholder="Father's name"></div>
+      <div class="fg"><label>Mother's Name *</label><input type="text" id="e_mother" placeholder="Mother's name"></div>
+      <div class="fg">
+        <label>Gender</label>
+        <div class="rrow">
+          <label class="ri"><input type="radio" name="egender" value="Male"> Male</label>
+          <label class="ri"><input type="radio" name="egender" value="Female"> Female</label>
+          <label class="ri"><input type="radio" name="egender" value="Other"> Other</label>
+        </div>
+      </div>
+      <div class="fg"><label>Date of Birth</label><input type="date" id="e_dob"></div>
+      <div class="fg"><label>Mobile Number *</label><input type="text" id="e_mobile" pattern="[0-9]{10}" placeholder="10 digit number"></div>
+      <div class="fg">
+        <label>Course *</label>
+        <select id="e_course">
+          <option value="">Select Course</option>
+          <option>ADCA</option><option>DCA</option><option>DTP</option><option>MIS</option>
+          <option>CFA</option><option>Excel Advanced</option><option>Tally</option>
+          <option>HTML</option><option>CSS</option><option>Typing</option><option>Photoshop</option><option>Other</option>
+        </select>
+      </div>
+      <div class="fg"><label>Course Fee (₹) *</label><input type="number" id="e_fee" placeholder="Total fee" min="0" oninput="calcDues('e_fee','e_paid','e_dues')"></div>
+      <div class="fg"><label>Paid Amount (₹)</label><input type="number" id="e_paid" placeholder="Amount paid" min="0" oninput="calcDues('e_fee','e_paid','e_dues')"></div>
+      <div class="fg"><label>Dues Amount (₹)</label><input type="text" id="e_dues" readonly style="background:#f9fafb;cursor:not-allowed;color:var(--gy);"></div>
+      <div class="fg full"><label>Complete Address</label><input type="text" id="e_addr" placeholder="Full address"></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;">
+      <button onclick="saveEdit()" style="padding:11px 28px;background:linear-gradient(135deg,var(--pr),var(--pr2));color:var(--wh);border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;">💾 Save Changes</button>
+      <button onclick="closeM('moEdit')" style="padding:11px 22px;background:#f3f4f6;color:var(--gy);border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PAY MODAL ═══ -->
+<div class="mo" id="moPay">
+  <div class="md md-sm">
+    <div class="mhd"><h3>💰 Add Payment</h3><button class="mcl" onclick="closeM('moPay')">✕</button></div>
+    <div id="moPayInfo" style="background:var(--lt);padding:10px;border-radius:9px;margin-bottom:12px;font-size:13px;"></div>
+    <div class="pfg"><label>Payment Amount (₹) *</label><input type="number" id="pAmt" placeholder="Enter amount" min="1"></div>
+    <div class="pfg"><label>Payment Mode *</label><select id="pMode"><option>Cash</option><option>UPI/QR</option><option>Bank Transfer</option><option>Cheque</option></select></div>
+    <div class="pfg"><label>Date</label><input type="date" id="pDate"></div>
+    <div class="pfg"><label>Note (Optional)</label><input type="text" id="pNote" placeholder="Any note..."></div>
+    <button onclick="savePayment()" style="width:100%;padding:12px;background:var(--pr);color:var(--wh);border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;">✅ Save & Print Slip</button>
+  </div>
+</div>
+
+<!-- ═══ SLIP MODAL ═══ -->
+<div class="mo" id="moSlip">
+  <div class="md md-sm">
+    <div class="mhd"><h3>🧾 Payment Receipt</h3><button class="mcl" onclick="closeM('moSlip')">✕</button></div>
+    <div id="slipView"></div>
+    <div style="display:flex;gap:10px;margin-top:14px;">
+      <button onclick="printSlip()" style="flex:1;padding:11px;background:var(--pr);color:var(--wh);border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;">🖨️ Print</button>
+      <button onclick="closeM('moSlip')" style="flex:1;padding:11px;background:#f3f4f6;color:var(--gy);border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════ STATE ════════════════════
+var AUSER = localStorage.getItem('ri_u') || 'admin';
+var APASS = localStorage.getItem('ri_p') || 'royinfotech@2026';
+var GURL  = localStorage.getItem('ri_g') || '';
+var STU   = JSON.parse(localStorage.getItem('ri_s') || '[]');
+var CNT   = parseInt(localStorage.getItem('ri_c') || '1');
+var CF    = 'all';
+var curAdm = null;
+var sPhoto = '', sSlip = '';
+var bulkParsed = [];
+
+// ════ SIGNATURE STATE ════
+var SIGN_IMG = localStorage.getItem('ri_sign') || ''; // base64 or ''
+var tempSignB64 = ''; // holds newly selected sign before saving
+
+// ════════════════════ INIT ════════════════════
+window.onload = function(){
+  refreshAdmNo();
+  updateRcpAuthSign();   // set sign in receipt area on load
+  updateSignStatus();    // show status in settings
+  if(window.innerWidth <= 768) document.getElementById('mBtn').style.display = 'block';
+};
+
+function refreshAdmNo(){
+  var yr = new Date().getFullYear();
+  document.getElementById('admNo').textContent = 'Admission No: RI-' + yr + '-' + String(CNT).padStart(4,'0');
+}
+
+function save(){ localStorage.setItem('ri_s', JSON.stringify(STU)); }
+
+// ════════════════════ SIGNATURE HELPERS ════════════════════
+
+// Build the sign HTML for use in receipt footer
+function getAuthSignHTML(labelText){
+  labelText = labelText || 'Authorized Signature';
+  if(SIGN_IMG){
+    return '<div class="sbox"><div class="sign-img-box"><img src="'+SIGN_IMG+'" alt="Authorized Sign"></div>'+labelText+'</div>';
+  } else {
+    return '<div class="sbox"><div class="sline"></div>'+labelText+'</div>';
+  }
+}
+
+// Update the receipt area authorized sign box
+function updateRcpAuthSign(){
+  var el = document.getElementById('rcpAuthSign');
+  if(!el) return;
+  if(SIGN_IMG){
+    el.innerHTML = '<div class="sign-img-box"><img src="'+SIGN_IMG+'" alt="Authorized Sign" style="max-width:120px;max-height:50px;object-fit:contain;"></div>Authorized Signature';
+  } else {
+    el.innerHTML = '<div class="sline"></div>Authorized Signature';
+  }
+}
+
+// Show current sign status in settings page
+function updateSignStatus(){
+  var el = document.getElementById('signStatus');
+  if(!el) return;
+  if(SIGN_IMG){
+    el.textContent = '✅ Signature saved hai — yeh har receipt aur slip mein appear hogi.';
+    el.style.color = '#065f46';
+  } else {
+    el.textContent = '📝 Koi signature save nahi hai. Upload karo settings mein.';
+    el.style.color = '#6b7280';
+  }
+}
+
+// Preview sign when file selected
+function previewSign(input){
+  if(input.files && input.files[0]){
+    var r = new FileReader();
+    r.onload = function(e){
+      tempSignB64 = e.target.result;
+      var wrap = document.getElementById('signPreviewInner');
+      wrap.innerHTML = '<img src="'+tempSignB64+'" alt="Preview" style="max-width:200px;max-height:70px;object-fit:contain;border:1px solid var(--bd);border-radius:6px;padding:4px;background:#fff;">' +
+        '<p style="margin-top:8px;font-size:12px;color:var(--gy);">Preview — Save karne ke liye button dabao ✅</p>';
+    };
+    r.readAsDataURL(input.files[0]);
+  }
+}
+
+function saveSign(){
+  var m = document.getElementById('signMsg');
+  if(!tempSignB64){ showMsg(m,'⚠️ Pehle signature image select karo!','#fef3c7','#92400e'); return; }
+  SIGN_IMG = tempSignB64;
+  localStorage.setItem('ri_sign', SIGN_IMG);
+  tempSignB64 = '';
+  document.getElementById('signFile').value = '';
+  updateRcpAuthSign();
+  updateSignStatus();
+  showMsg(m,'✅ Signature save ho gayi! Har receipt aur slip mein appear hogi.','#d1fae5','#065f46');
+}
+
+function removeSign(){
+  if(!confirm('Signature remove karna chahte hain?')) return;
+  SIGN_IMG = '';
+  tempSignB64 = '';
+  localStorage.removeItem('ri_sign');
+  document.getElementById('signFile').value = '';
+  document.getElementById('signPreviewInner').innerHTML = '<span class="no-sign">📝 Koi signature upload nahi hai abhi</span>';
+  updateRcpAuthSign();
+  updateSignStatus();
+  var m = document.getElementById('signMsg');
+  showMsg(m,'🗑️ Signature remove ho gayi.','#fee2e2','#991b1b');
+}
+
+// ════════════════════ DUES CALC ════════════════════
+function calcDues(feeId, paidId, duesId){
+  var fee  = parseFloat(document.getElementById(feeId).value)  || 0;
+  var paid = parseFloat(document.getElementById(paidId).value) || 0;
+  document.getElementById(duesId).value = Math.max(0, fee - paid);
+}
+
+// ════════════════════ FILE → BASE64 ════════════════════
+function toB64(file){
+  return new Promise(function(res,rej){
+    var r = new FileReader();
+    r.readAsDataURL(file);
+    r.onload = function(){ res(r.result); };
+    r.onerror = rej;
+  });
+}
+document.getElementById('f_photo').addEventListener('change', async function(e){
+  if(e.target.files[0]) sPhoto = await toB64(e.target.files[0]);
+});
+document.getElementById('f_slip').addEventListener('change', async function(e){
+  if(e.target.files[0]) sSlip  = await toB64(e.target.files[0]);
+});
+
+// ════════════════════ ADMISSION SUBMIT ════════════════════
+async function submitAdm(ev){
+  ev.preventDefault();
+  var sp = document.getElementById('sp');
+  sp.style.display='block';
+  document.getElementById('msgOk').style.display='none';
+  document.getElementById('msgEr').style.display='none';
+
+  var gv = document.querySelector('input[name=gender]:checked');
+  var yr = new Date().getFullYear();
+  var admNo = 'RI-' + yr + '-' + String(CNT).padStart(4,'0');
+
+  var d = {
+    admissionNo: admNo,
+    studentName: document.getElementById('f_name').value,
+    fatherName:  document.getElementById('f_father').value,
+    motherName:  document.getElementById('f_mother').value,
+    gender:      gv ? gv.value : '',
+    dob:         document.getElementById('f_dob').value,
+    mobile:      document.getElementById('f_mobile').value,
+    course:      document.getElementById('f_course').value,
+    courseFee:   parseFloat(document.getElementById('f_fee').value)||0,
+    paidAmount:  parseFloat(document.getElementById('f_paid').value)||0,
+    duesAmount:  parseFloat(document.getElementById('f_dues').value)||0,
+    address:     document.getElementById('f_addr').value,
+    studentPhoto: sPhoto,
+    paymentSlip:  sSlip,
+    timestamp:   new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'}),
+    paymentHistory: [],
+    status: 'Partial'
+  };
+  if(d.paidAmount > 0) d.paymentHistory.push({amount:d.paidAmount, mode:'Initial Payment', date:new Date().toLocaleDateString('en-IN'), note:'Admission fee'});
+  if(d.duesAmount === 0) d.status = 'Paid';
+
+  STU.push(d); CNT++;
+  save(); localStorage.setItem('ri_c', CNT);
+
+  if(GURL){
+    try{ await fetch(GURL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}); }
+    catch(e){}
+  }
+  sp.style.display='none';
+  document.getElementById('msgOk').style.display='block';
+  refreshAdmNo();
+  setTimeout(function(){ document.getElementById('msgOk').style.display='none'; showRcp(d); }, 1200);
+}
+
+// ════════════════════ SHOW RECEIPT ════════════════════
+function showRcp(d){
+  var dues = d.duesAmount;
+  var ph = d.studentPhoto
+    ? '<img src="' + d.studentPhoto + '" class="rcp-photo" alt="Photo">'
+    : '<div class="rcp-ph-box">👤</div>';
+
+  document.getElementById('rcpBody').innerHTML =
+    '<div class="rcp-layout">' + ph +
+    '<div class="rcp-info">' +
+    mkRow('Admission No','<strong>'+d.admissionNo+'</strong>') +
+    mkRow('Student Name', d.studentName) +
+    mkRow("Father's Name", d.fatherName) +
+    mkRow("Mother's Name", d.motherName) +
+    mkRow('Gender / DOB', d.gender + ' / ' + d.dob) +
+    mkRow('Mobile', d.mobile) +
+    mkRow('Course','<strong>'+d.course+'</strong>') +
+    mkRow('Address', d.address) +
+    mkRow('Date', d.timestamp) +
+    '</div></div>' +
+    '<div class="fee-grid">' +
+    '<div class="fg-item fg-tot"><div class="fgl">Total Fee</div><div class="fgv">₹'+n(d.courseFee)+'</div></div>' +
+    '<div class="fg-item fg-paid"><div class="fgl">Paid</div><div class="fgv">₹'+n(d.paidAmount)+'</div></div>' +
+    '<div class="fg-item fg-dues"><div class="fgl">Dues</div><div class="fgv" style="color:'+(dues>0?'#991b1b':'#065f46')+';">₹'+n(dues)+'</div></div>' +
+    '</div>';
+
+  // Update auth sign in receipt footer
+  updateRcpAuthSign();
+
+  document.getElementById('rcpArea').style.display = 'block';
+  document.getElementById('rcpArea').scrollIntoView({behavior:'smooth'});
+}
+
+function mkRow(lbl,val){ return '<div class="rrow2"><span class="rl">'+lbl+':</span><span class="rv">'+val+'</span></div>'; }
+function n(v){ return (parseFloat(v)||0).toLocaleString('en-IN'); }
+
+// ════════════════════ PRINT RECEIPT ════════════════════
+function printReceipt(){
+  document.body.classList.add('print-rcp');
+  window.print();
+  setTimeout(function(){ document.body.classList.remove('print-rcp'); }, 1000);
+}
+
+function closeReceipt(){
+  document.getElementById('rcpArea').style.display='none';
+  document.getElementById('admForm').reset();
+  sPhoto=''; sSlip='';
+  document.getElementById('f_dues').value='';
+}
+function resetAdm(){
+  if(confirm('Form clear karna chahte hain?')){
+    document.getElementById('admForm').reset();
+    sPhoto=''; sSlip='';
+    document.getElementById('f_dues').value='';
+    document.getElementById('rcpArea').style.display='none';
+    document.getElementById('msgOk').style.display='none';
+    document.getElementById('msgEr').style.display='none';
+  }
+}
+
+// ════════════════════ LOGIN ════════════════════
+function openLogin(){
+  document.getElementById('loginOv').classList.add('open');
+  setTimeout(function(){ document.getElementById('lb_user').focus(); },100);
+}
+function closeLogin(){ document.getElementById('loginOv').classList.remove('open'); }
+document.getElementById('lb_pass').addEventListener('keydown',function(e){ if(e.key==='Enter') doLogin(); });
+document.getElementById('lb_user').addEventListener('keydown',function(e){ if(e.key==='Enter') doLogin(); });
+document.getElementById('loginOv').addEventListener('click',function(e){ if(e.target===this) closeLogin(); });
+
+function doLogin(){
+  var u = document.getElementById('lb_user').value.trim();
+  var p = document.getElementById('lb_pass').value;
+  if(u===AUSER && p===APASS){
+    closeLogin();
+    document.getElementById('admPage').style.display='none';
+    document.getElementById('adminPanel').style.display='block';
+    document.getElementById('apUsr').textContent=AUSER;
+    refreshAdmin();
+  } else {
+    document.getElementById('lb_err').style.display='block';
+    setTimeout(function(){ document.getElementById('lb_err').style.display='none'; },2500);
+  }
+}
+function doLogout(){
+  if(confirm('Logout karna chahte hain?')){
+    document.getElementById('adminPanel').style.display='none';
+    document.getElementById('admPage').style.display='block';
+    document.getElementById('lb_user').value='';
+    document.getElementById('lb_pass').value='';
+    window.scrollTo(0,0);
+  }
+}
+function goAdm(){
+  document.getElementById('adminPanel').style.display='none';
+  document.getElementById('admPage').style.display='block';
+  window.scrollTo(0,0);
+}
+
+// ════════════════════ ADMIN NAV ════════════════════
+function apNav(page){
+  document.querySelectorAll('.ap-pg').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.ni').forEach(function(n){ n.classList.remove('active'); });
+  document.getElementById('pg_'+page).classList.add('active');
+  var el = document.getElementById('nav_'+page);
+  if(el) el.classList.add('active');
+  var t={dashboard:'Dashboard',students:'All Students',payments:'Payments',dues:'Dues Tracker',bulk:'Bulk Upload',settings:'Settings'};
+  document.getElementById('apTitle').textContent = t[page]||page;
+  if(page==='students') renderSt(STU);
+  if(page==='payments') renderPay(STU);
+  if(page==='dues')     renderDues();
+  if(page==='settings'){
+    document.getElementById('sUsr').value=AUSER;
+    document.getElementById('sUrl').value=GURL;
+    // Show saved sign preview in settings
+    var inner = document.getElementById('signPreviewInner');
+    if(SIGN_IMG){
+      inner.innerHTML = '<img src="'+SIGN_IMG+'" alt="Saved Signature" style="max-width:200px;max-height:70px;object-fit:contain;border:1px solid var(--bd);border-radius:6px;padding:4px;background:#fff;">' +
+        '<p style="margin-top:8px;font-size:12px;color:#065f46;font-weight:700;">✅ Yeh signature currently active hai</p>';
+    } else {
+      inner.innerHTML = '<span class="no-sign">📝 Koi signature upload nahi hai abhi</span>';
+    }
+    updateSignStatus();
+  }
+  document.getElementById('apSb').classList.remove('open');
+}
+
+function refreshAdmin(){
+  STU = JSON.parse(localStorage.getItem('ri_s')||'[]');
+  updateDash();
+  if(document.getElementById('pg_students').classList.contains('active')) renderSt(STU);
+  if(document.getElementById('pg_payments').classList.contains('active')) renderPay(STU);
+  if(document.getElementById('pg_dues').classList.contains('active'))     renderDues();
+}
+
+// ════════════════════ DASHBOARD ════════════════════
+function updateDash(){
+  var tot = STU.length;
+  var col = STU.reduce(function(s,x){ return s+(parseFloat(x.paidAmount)||0); },0);
+  var due = STU.reduce(function(s,x){ return s+(parseFloat(x.duesAmount)||0); },0);
+  var cc  = {}; STU.forEach(function(x){ if(x.course) cc[x.course]=1; });
+  var ful = STU.filter(function(x){ return (parseFloat(x.duesAmount)||0)===0; }).length;
+
+  document.getElementById('d1').textContent=tot;
+  document.getElementById('d2').textContent='₹'+n(col);
+  document.getElementById('d3').textContent='₹'+n(due);
+  document.getElementById('d4').textContent=Object.keys(cc).length;
+  document.getElementById('p1').textContent=ful;
+  document.getElementById('p2').textContent=tot-ful;
+  document.getElementById('p3').textContent='₹'+n(col);
+  document.getElementById('dTotal').textContent='Total: ₹'+n(due);
+
+  var rec=[].concat(STU).reverse().slice(0,5);
+  document.getElementById('recTbl').innerHTML = rec.length===0
+    ? '<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--gy);">No admissions yet</td></tr>'
+    : rec.map(function(s){
+        var d=parseFloat(s.duesAmount)||0;
+        return '<tr><td><strong style="color:var(--pr);font-size:11px;">'+s.admissionNo+'</strong></td>' +
+          '<td>'+s.studentName+'</td><td>'+s.course+'</td>' +
+          '<td>₹'+n(s.courseFee)+'</td>' +
+          '<td style="color:#065f46;font-weight:700;">₹'+n(s.paidAmount)+'</td>' +
+          '<td style="color:'+(d>0?'#991b1b':'#065f46')+';font-weight:700;">₹'+n(d)+'</td>' +
+          '<td><button class="ab av" onclick="viewSt(\''+s.admissionNo+'\')">👁 View</button> ' +
+          '<button class="ab as" onclick="showSlip(\''+s.admissionNo+'\')">🧾</button></td></tr>';
+      }).join('');
+
+  var ctr={}; STU.forEach(function(s){ if(s.course) ctr[s.course]=(ctr[s.course]||0)+1; });
+  var mx=Math.max.apply(null,Object.values(ctr).concat([1]));
+  document.getElementById('chart').innerHTML = Object.keys(ctr).length===0
+    ? '<p style="color:var(--gy);font-size:12px;">No data yet</p>'
+    : Object.keys(ctr).map(function(c){
+        return '<div class="cbr"><div class="cbl">'+c+'</div>' +
+          '<div class="cbtr"><div class="cbf" style="width:'+((ctr[c]/mx)*100)+'%"><span>'+ctr[c]+'</span></div></div></div>';
+      }).join('');
+}
+
+// ════════════════════ STUDENTS TABLE ════════════════════
+function renderSt(list){
+  var fl = CF==='all' ? list : list.filter(function(s){ return s.course===CF; });
+  document.getElementById('stTbl').innerHTML = fl.length===0
+    ? '<tr><td colspan="8" style="text-align:center;padding:22px;color:var(--gy);">No students found</td></tr>'
+    : fl.map(function(s){
+        var d=parseFloat(s.duesAmount)||0;
+        var b=d===0?'<span class="badge b-paid">✅ Paid</span>':'<span class="badge b-dues">⚠️ Dues</span>';
+        var ph=s.studentPhoto?'<img src="'+s.studentPhoto+'" style="width:32px;height:38px;border-radius:6px;object-fit:cover;border:2px solid var(--bd);">'
+          :'<div style="width:32px;height:38px;border-radius:6px;background:var(--lt);display:flex;align-items:center;justify-content:center;font-size:16px;border:2px solid var(--bd);">👤</div>';
+        return '<tr><td><strong style="color:var(--pr);font-size:11px;">'+s.admissionNo+'</strong></td>' +
+          '<td>'+ph+'</td><td><strong>'+s.studentName+'</strong></td>' +
+          '<td style="font-size:11px;">'+s.fatherName+'</td>' +
+          '<td style="font-size:11px;">'+s.mobile+'</td>' +
+          '<td><span style="background:var(--lt);padding:2px 7px;border-radius:5px;font-size:11px;font-weight:700;">'+s.course+'</span></td>' +
+          '<td>'+b+'</td>' +
+          '<td><button class="ab av" onclick="viewSt(\''+s.admissionNo+'\')">👁</button> ' +
+          '<button class="ab ae" onclick="openEditM(\''+s.admissionNo+'\')">✏️</button> ' +
+          '<button class="ab ap2" onclick="openPayM(\''+s.admissionNo+'\')">💰</button> ' +
+          '<button class="ab as" onclick="showSlip(\''+s.admissionNo+'\')">🧾</button></td></tr>';
+      }).join('');
+}
+function fSt(){
+  var q=document.getElementById('srSt').value.toLowerCase();
+  renderSt(STU.filter(function(s){ return s.studentName.toLowerCase().indexOf(q)>=0||s.mobile.indexOf(q)>=0||s.course.toLowerCase().indexOf(q)>=0||s.admissionNo.toLowerCase().indexOf(q)>=0; }));
+}
+function setCF(c,btn){
+  CF=c;
+  document.querySelectorAll('.fbtn').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  renderSt(STU);
+}
+
+// ════════════════════ PAYMENTS TABLE ════════════════════
+function renderPay(list){
+  document.getElementById('payTbl').innerHTML = list.length===0
+    ? '<tr><td colspan="8" style="text-align:center;padding:22px;color:var(--gy);">No records</td></tr>'
+    : list.map(function(s){
+        var d=parseFloat(s.duesAmount)||0, paid=parseFloat(s.paidAmount)||0, fee=parseFloat(s.courseFee)||0;
+        var b=d===0?'<span class="badge b-paid">✅ Full</span>':'<span class="badge b-part">⚡ Partial</span>';
+        return '<tr><td><strong style="color:var(--pr);font-size:11px;">'+s.admissionNo+'</strong></td>' +
+          '<td><strong>'+s.studentName+'</strong></td><td>'+s.course+'</td>' +
+          '<td style="font-weight:700;">₹'+n(fee)+'</td>' +
+          '<td style="color:#065f46;font-weight:700;">₹'+n(paid)+'</td>' +
+          '<td style="color:'+(d>0?'#991b1b':'#065f46')+';font-weight:700;">₹'+n(d)+'</td>' +
+          '<td>'+b+'</td>' +
+          '<td><button class="ab ap2" onclick="openPayM(\''+s.admissionNo+'\')">💰 Pay</button> ' +
+          '<button class="ab as" onclick="showSlip(\''+s.admissionNo+'\')">🧾</button></td></tr>';
+      }).join('');
+}
+function fPay(){
+  var q=document.getElementById('srPay').value.toLowerCase();
+  renderPay(STU.filter(function(s){ return s.studentName.toLowerCase().indexOf(q)>=0||s.admissionNo.toLowerCase().indexOf(q)>=0; }));
+}
+
+// ════════════════════ DUES TABLE ════════════════════
+function renderDues(){
+  var wd=STU.filter(function(s){ return (parseFloat(s.duesAmount)||0)>0; })
+            .sort(function(a,b){ return (parseFloat(b.duesAmount)||0)-(parseFloat(a.duesAmount)||0); });
+  var tot=wd.reduce(function(s,x){ return s+(parseFloat(x.duesAmount)||0); },0);
+  document.getElementById('dTotal').textContent='Total: ₹'+n(tot);
+  document.getElementById('duesTbl').innerHTML = wd.length===0
+    ? '<tr><td colspan="8" style="text-align:center;padding:22px;color:#065f46;font-weight:700;">🎉 No dues! All payments clear!</td></tr>'
+    : wd.map(function(s){
+        return '<tr><td><strong style="color:var(--pr);font-size:11px;">'+s.admissionNo+'</strong></td>' +
+          '<td><strong>'+s.studentName+'</strong></td><td>'+s.mobile+'</td><td>'+s.course+'</td>' +
+          '<td>₹'+n(s.courseFee)+'</td>' +
+          '<td style="color:#065f46;font-weight:700;">₹'+n(s.paidAmount)+'</td>' +
+          '<td style="color:#991b1b;font-weight:800;">₹'+n(s.duesAmount)+'</td>' +
+          '<td><button class="ab ap2" onclick="openPayM(\''+s.admissionNo+'\')">💰 Collect</button></td></tr>';
+      }).join('');
+}
+
+// ════════════════════ VIEW STUDENT ════════════════════
+function viewSt(admNo){
+  var s=STU.filter(function(x){ return x.admissionNo===admNo; })[0];
+  if(!s){ alert('Student not found!'); return; }
+  curAdm=admNo;
+  var d=parseFloat(s.duesAmount)||0, paid=parseFloat(s.paidAmount)||0, fee=parseFloat(s.courseFee)||0;
+  var ph=s.studentPhoto?'<img src="'+s.studentPhoto+'" class="sd-img">'
+    :'<div class="sd-ph">👤</div>';
+  var hist=(s.paymentHistory||[]).length>0
+    ?(s.paymentHistory||[]).map(function(p){ return '<div class="phi"><div><strong>'+p.mode+'</strong><div class="phi-dt">'+p.date+(p.note?' • '+p.note:'')+'</div></div><div class="phi-am">+₹'+n(p.amount)+'</div></div>'; }).join('')
+    :'<p style="color:var(--gy);font-size:12px;padding:8px 0;">No payment history</p>';
+
+  document.getElementById('moStBody').innerHTML =
+    '<div class="sd-top">'+ph+'<div>' +
+    '<h2 style="font-size:17px;color:var(--pr);">'+s.studentName+'</h2>' +
+    '<p style="color:var(--gy);font-size:12px;margin-top:4px;">Father: '+s.fatherName+' | Mother: '+s.motherName+'</p>' +
+    '<p style="color:var(--gy);font-size:12px;">📱 '+s.mobile+' | '+s.gender+' | DOB: '+s.dob+'</p>' +
+    '<p style="color:var(--gy);font-size:12px;margin-top:3px;">📍 '+s.address+'</p>' +
+    '<span style="background:var(--lt);padding:3px 9px;border-radius:6px;font-size:12px;font-weight:700;color:var(--pr);display:inline-block;margin-top:6px;">📚 '+s.course+'</span>' +
+    '</div></div>' +
+    '<div class="fee-sum">' +
+    '<div class="fsi fsi-t"><span>Total Fee</span><strong>₹'+n(fee)+'</strong></div>' +
+    '<div class="fsi fsi-p"><span>Paid</span><strong>₹'+n(paid)+'</strong></div>' +
+    '<div class="fsi fsi-d"><span>Dues</span><strong>₹'+n(d)+'</strong></div>' +
+    '</div>' +
+    '<h4 style="font-size:13px;font-weight:800;color:var(--pr);margin-bottom:8px;">💳 Payment History</h4>'+hist;
+  openM('moSt');
+}
+
+// ════════════════════ EDIT MODAL ════════════════════
+function openEditM(admNo){
+  var s=STU.filter(function(x){ return x.admissionNo===admNo; })[0];
+  if(!s){ alert('Student not found!'); return; }
+  curAdm=admNo;
+  closeM('moSt');
+  document.getElementById('e_name').value   = s.studentName  || '';
+  document.getElementById('e_father').value = s.fatherName   || '';
+  document.getElementById('e_mother').value = s.motherName   || '';
+  document.getElementById('e_dob').value    = s.dob          || '';
+  document.getElementById('e_mobile').value = s.mobile       || '';
+  document.getElementById('e_course').value = s.course       || '';
+  document.getElementById('e_fee').value    = s.courseFee    || '';
+  document.getElementById('e_paid').value   = s.paidAmount   || '';
+  document.getElementById('e_dues').value   = s.duesAmount   || '';
+  document.getElementById('e_addr').value   = s.address      || '';
+  var g = s.gender || 'Male';
+  var radios = document.querySelectorAll('input[name=egender]');
+  radios.forEach(function(r){ r.checked = r.value===g; });
+  openM('moEdit');
+}
+
+function saveEdit(){
+  var s=STU.filter(function(x){ return x.admissionNo===curAdm; })[0];
+  if(!s){ alert('Student not found!'); return; }
+  var nm = document.getElementById('e_name').value.trim();
+  var mo = document.getElementById('e_mobile').value.trim();
+  var cr = document.getElementById('e_course').value;
+  if(!nm){ alert('Student name required!'); return; }
+  if(!mo || mo.length!==10){ alert('Valid 10-digit mobile required!'); return; }
+  if(!cr){ alert('Course select karo!'); return; }
+
+  var gv = document.querySelector('input[name=egender]:checked');
+  var fee  = parseFloat(document.getElementById('e_fee').value)||0;
+  var paid = parseFloat(document.getElementById('e_paid').value)||0;
+  var dues = Math.max(0, fee - paid);
+
+  s.studentName = nm;
+  s.fatherName  = document.getElementById('e_father').value;
+  s.motherName  = document.getElementById('e_mother').value;
+  s.gender      = gv ? gv.value : s.gender;
+  s.dob         = document.getElementById('e_dob').value;
+  s.mobile      = mo;
+  s.course      = cr;
+  s.courseFee   = fee;
+  s.paidAmount  = paid;
+  s.duesAmount  = dues;
+  s.address     = document.getElementById('e_addr').value;
+  s.status      = dues===0 ? 'Paid' : 'Partial';
+
+  save();
+  refreshAdmin();
+  closeM('moEdit');
+  alert('✅ Changes saved successfully!');
+}
+
+// ════════════════════ PAYMENT MODAL ════════════════════
+function openPayM(admNo){
+  var s=STU.filter(function(x){ return x.admissionNo===admNo; })[0];
+  if(!s){ alert('Student not found!'); return; }
+  curAdm=admNo;
+  closeM('moSt');
+  var d=parseFloat(s.duesAmount)||0;
+  document.getElementById('moPayInfo').innerHTML =
+    '<strong>'+s.studentName+'</strong> | '+s.course+'<br>' +
+    '<span style="color:#991b1b;font-weight:700;">Remaining Dues: ₹'+n(d)+'</span>';
+  document.getElementById('pAmt').value  = d || '';
+  document.getElementById('pDate').value = new Date().toISOString().split('T')[0];
+  document.getElementById('pNote').value = '';
+  openM('moPay');
+}
+
+function savePayment(){
+  var s=STU.filter(function(x){ return x.admissionNo===curAdm; })[0];
+  if(!s){ alert('Student not found!'); return; }
+  var amt  = parseFloat(document.getElementById('pAmt').value);
+  var mode = document.getElementById('pMode').value;
+  var date = document.getElementById('pDate').value;
+  var note = document.getElementById('pNote').value;
+  if(!amt||amt<=0){ alert('Valid amount enter karo!'); return; }
+
+  s.paidAmount = (parseFloat(s.paidAmount)||0) + amt;
+  var nd = (parseFloat(s.courseFee)||0) - s.paidAmount;
+  s.duesAmount = nd < 0 ? 0 : nd;
+  if(!s.paymentHistory) s.paymentHistory=[];
+  s.paymentHistory.push({amount:amt, mode:mode, date:new Date(date).toLocaleDateString('en-IN'), note:note});
+  s.status = s.duesAmount===0 ? 'Paid' : 'Partial';
+
+  save(); refreshAdmin(); closeM('moPay');
+  var lp = {amount:amt, mode:mode, date:date, note:note};
+  setTimeout(function(){ buildAndShowSlip(curAdm, lp); }, 300);
+}
+
+// ════════════════════ SLIP ════════════════════
+function showSlip(admNo){
+  buildAndShowSlip(admNo, null);
+}
+
+function buildAndShowSlip(admNo, lastPay){
+  var s=STU.filter(function(x){ return x.admissionNo===admNo; })[0];
+  if(!s){ alert('Student not found!'); return; }
+  curAdm=admNo;
+  var payAmt  = lastPay ? lastPay.amount  : (parseFloat(s.paidAmount)||0);
+  var payMode = lastPay ? lastPay.mode    : ((s.paymentHistory&&s.paymentHistory.length>0)?s.paymentHistory[s.paymentHistory.length-1].mode:'Payment');
+  var payDate = lastPay ? new Date(lastPay.date).toLocaleDateString('en-IN') : new Date().toLocaleDateString('en-IN');
+  var dues = parseFloat(s.duesAmount)||0;
+  var rcNo = s.admissionNo + '-P' + (s.paymentHistory||[]).length;
+
+  // Build authorized sign section for slip
+  var authSignSection = SIGN_IMG
+    ? '<div class="ss"><img src="'+SIGN_IMG+'" style="max-width:85px;max-height:38px;object-fit:contain;display:block;margin:0 auto 4px;"><div class="ssl"></div>Authorized Sign</div>'
+    : '<div class="ss"><div class="ssl"></div>Authorized Sign</div>';
+
+  var html =
+    '<div class="slip">' +
+    '<div class="slip-hd">' +
+    '<img src="roy_templete1.png" alt="Roy Infotech" onerror="this.style.display=\'none\'">' +
+    '<p style="font-size:11px;color:var(--gy);margin-top:4px;">Station Road, Bankaghat, Kachchi Dargah, Patna</p>' +
+    '<p style="font-size:11px;color:var(--gy);">📞 9060180354 | royinfotech.patna@gmail.com</p>' +
+    '</div>' +
+    '<div class="slip-ttl">💳 PAYMENT RECEIPT</div>' +
+    '<div class="slip-row"><span>Receipt No:</span><span>'+rcNo+'</span></div>' +
+    '<div class="slip-row"><span>Date:</span><span>'+payDate+'</span></div>' +
+    '<div class="slip-row"><span>Admission No:</span><span>'+s.admissionNo+'</span></div>' +
+    '<div class="slip-row"><span>Student Name:</span><span>'+s.studentName+'</span></div>' +
+    "<div class=\"slip-row\"><span>Father's Name:</span><span>"+s.fatherName+'</span></div>' +
+    '<div class="slip-row"><span>Course:</span><span>'+s.course+'</span></div>' +
+    '<div class="slip-row"><span>Payment Mode:</span><span>'+payMode+'</span></div>' +
+    '<div class="slip-amt-box"><div class="sal">Amount Received</div><div class="sav">₹'+n(payAmt)+'</div></div>' +
+    '<div class="slip-row"><span>Total Course Fee:</span><span>₹'+n(s.courseFee)+'</span></div>' +
+    '<div class="slip-row"><span>Total Paid:</span><span style="color:#065f46;font-weight:800;">₹'+n(s.paidAmount)+'</span></div>' +
+    '<div class="slip-row"><span>Remaining Dues:</span><span style="color:'+(dues>0?'#991b1b':'#065f46')+';font-weight:800;">₹'+n(dues)+'</span></div>' +
+    '<div class="slip-signs">' +
+    '<div class="ss"><div class="ssl"></div>Student Sign</div>' +
+    authSignSection +
+    '</div>' +
+    '<div class="slip-ft">Computer generated receipt. Roy Infotech Computer Education.</div>' +
+    '</div>';
+
+  document.getElementById('slipView').innerHTML = html;
+  document.getElementById('slipPrintArea').innerHTML = html;
+  closeM('moSt');
+  openM('moSlip');
+}
+
+// ════════════════════ PRINT SLIP ════════════════════
+function printSlip(){
+  document.body.classList.add('print-slip');
+  window.print();
+  setTimeout(function(){ document.body.classList.remove('print-slip'); }, 1000);
+}
+
+// ════════════════════ DELETE ════════════════════
+function delSt(admNo){
+  if(confirm('Delete karna chahte hain? Ye undo nahi hoga!')){
+    STU=STU.filter(function(s){ return s.admissionNo!==admNo; });
+    save(); refreshAdmin(); closeM('moSt');
+  }
+}
+
+// ════════════════════ BULK UPLOAD ════════════════════
+function loadBulkFile(){
+  var file = document.getElementById('bulkFile').files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){ document.getElementById('bulkTA').value = e.target.result; };
+  reader.readAsText(file);
+}
+
+function parseBulk(){
+  var raw = document.getElementById('bulkTA').value.trim();
+  if(!raw){ showBMsg('⚠️ Pehle data paste karo!','#fef3c7','#92400e'); return; }
+  var lines = raw.split('\n').filter(function(l){ return l.trim().length>0; });
+  bulkParsed = [];
+  var errors = [];
+  lines.forEach(function(line, idx){
+    var cols = line.split(',').map(function(c){ return c.trim(); });
+    if(cols.length < 7){ errors.push('Line '+(idx+1)+': Kam columns'); return; }
+    var name=cols[0],father=cols[1],mother=cols[2],gender=cols[3]||'Male',dob=cols[4],mobile=cols[5],course=cols[6];
+    var fee=parseFloat(cols[7])||0, paid=parseFloat(cols[8])||0, dues=Math.max(0,fee-paid);
+    if(!name){ errors.push('Line '+(idx+1)+': Name required'); return; }
+    if(!mobile||mobile.length!==10){ errors.push('Line '+(idx+1)+': Invalid mobile'); return; }
+    bulkParsed.push({name,father,mother,gender,dob,mobile,course,fee,paid,dues,status:dues===0?'✅ Full Paid':'⚠️ Partial'});
+  });
+  if(errors.length>0&&bulkParsed.length===0){
+    showBMsg('❌ Errors:\n'+errors.join('\n'),'#fee2e2','#991b1b');
+    document.getElementById('bulkPreviewWrap').style.display='none';
+    return;
+  }
+  document.getElementById('bulkCount').textContent=bulkParsed.length;
+  document.getElementById('bulkPrevBody').innerHTML=bulkParsed.map(function(r,i){
+    return '<tr><td>'+(i+1)+'</td><td><strong>'+r.name+'</strong></td><td>'+r.father+'</td><td>'+r.gender+'</td><td>'+r.mobile+'</td><td>'+r.course+'</td><td>₹'+n(r.fee)+'</td><td style="color:#065f46;font-weight:700;">₹'+n(r.paid)+'</td><td style="color:#991b1b;font-weight:700;">₹'+n(r.dues)+'</td><td>'+r.status+'</td></tr>';
+  }).join('');
+  document.getElementById('bulkPreviewWrap').style.display='block';
+  if(errors.length>0) showBMsg('⚠️ '+bulkParsed.length+' parsed. '+errors.length+' skipped.','#fef3c7','#92400e');
+  else showBMsg('✅ '+bulkParsed.length+' students ready!','#d1fae5','#065f46');
+}
+
+function importBulk(){
+  if(bulkParsed.length===0){ alert('Pehle data parse karo!'); return; }
+  if(!confirm(bulkParsed.length+' students import karna chahte hain?')) return;
+  var yr=new Date().getFullYear(), imported=0;
+  bulkParsed.forEach(function(r){
+    if(STU.filter(function(s){ return s.mobile===r.mobile; })[0]) return;
+    var admNo='RI-'+yr+'-'+String(CNT).padStart(4,'0');
+    var ph=[];
+    if(r.paid>0) ph.push({amount:r.paid,mode:'Initial Payment',date:new Date().toLocaleDateString('en-IN'),note:'Bulk import'});
+    STU.push({admissionNo:admNo,studentName:r.name,fatherName:r.father,motherName:r.mother,gender:r.gender,dob:r.dob,mobile:r.mobile,course:r.course,courseFee:r.fee,paidAmount:r.paid,duesAmount:r.dues,address:'',studentPhoto:'',paymentSlip:'',timestamp:new Date().toLocaleDateString('en-IN'),paymentHistory:ph,status:r.dues===0?'Paid':'Partial'});
+    CNT++; imported++;
+  });
+  save(); localStorage.setItem('ri_c',CNT);
+  refreshAdmin();
+  showBMsg('🎉 '+imported+' students imported!','#d1fae5','#065f46');
+  document.getElementById('bulkPreviewWrap').style.display='none';
+  document.getElementById('bulkTA').value='';
+  bulkParsed=[];
+  setTimeout(function(){ apNav('students'); },1500);
+}
+
+function clearBulk(){
+  document.getElementById('bulkTA').value='';
+  document.getElementById('bulkFile').value='';
+  document.getElementById('bulkPreviewWrap').style.display='none';
+  document.getElementById('bulkMsg').style.display='none';
+  bulkParsed=[];
+}
+
+function showBMsg(txt,bg,col){
+  var m=document.getElementById('bulkMsg');
+  m.style.display='block'; m.style.background=bg; m.style.color=col;
+  m.style.whiteSpace='pre-wrap'; m.textContent=txt;
+}
+
+// ════════════════════ SETTINGS ════════════════════
+function saveSet(){
+  var nu=document.getElementById('sUsr').value.trim();
+  var cp=document.getElementById('sCur').value;
+  var np=document.getElementById('sNew').value;
+  var cf=document.getElementById('sCon').value;
+  var m=document.getElementById('setMsg');
+  if(cp!==APASS){ showMsg(m,'❌ Current password wrong!','#fee2e2','#991b1b'); return; }
+  if(np!==cf)   { showMsg(m,'❌ Passwords do not match!','#fee2e2','#991b1b'); return; }
+  if(np.length<6){ showMsg(m,'❌ Min 6 characters!','#fee2e2','#991b1b'); return; }
+  if(nu) AUSER=nu; if(np) APASS=np;
+  localStorage.setItem('ri_u',AUSER); localStorage.setItem('ri_p',APASS);
+  document.getElementById('apUsr').textContent=AUSER;
+  showMsg(m,'✅ Saved!','#d1fae5','#065f46');
+  document.getElementById('sCur').value=''; document.getElementById('sNew').value=''; document.getElementById('sCon').value='';
+}
+function saveUrl(){
+  GURL=document.getElementById('sUrl').value.trim();
+  localStorage.setItem('ri_g',GURL);
+  alert('✅ URL saved!');
+}
+function clearAll(){
+  if(confirm('⚠️ All student data delete hoga!')){
+    if(confirm('Bilkul sure hain?')){
+      STU=[]; CNT=1;
+      localStorage.setItem('ri_s','[]'); localStorage.setItem('ri_c','1');
+      refreshAdmin(); refreshAdmNo(); alert('Done.');
+    }
+  }
+}
+function showMsg(el,txt,bg,col){
+  el.style.display='block'; el.style.background=bg; el.style.color=col; el.textContent=txt;
+  setTimeout(function(){ el.style.display='none'; },3000);
+}
+
+// ════════════════════ MODAL HELPERS ════════════════════
+function openM(id){ document.getElementById(id).classList.add('open'); }
+function closeM(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.mo').forEach(function(o){
+  o.addEventListener('click',function(e){ if(e.target===this) this.classList.remove('open'); });
+});
+window.addEventListener('resize',function(){
+  var mb=document.getElementById('mBtn');
+  if(window.innerWidth<=768){ mb.style.display='block'; }
+  else{ mb.style.display='none'; document.getElementById('apSb').classList.remove('open'); }
+});
+</script>
+</body>
+</html>
