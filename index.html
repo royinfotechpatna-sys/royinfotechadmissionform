@@ -649,8 +649,23 @@ function refreshAdmNo(){
   var yr = new Date().getFullYear();
   document.getElementById('admNo').textContent = 'Admission No: RI-' + yr + '-' + String(CNT).padStart(4,'0');
 }
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzaoL4ee8Neu3_nffdXkTsh0ejKZGQYyvRJ0AvsGhzhOBE9jHgC88gxinxaE3_CgIdpEA/exec';
 
-function save(){ localStorage.setItem('ri_s', JSON.stringify(STU)); }
+function save(){ localStorage.setItem('ri_s', JSON.stringify(STU)); }async function save(){ 
+  localStorage.setItem('ri_s', JSON.stringify(STU));
+  if(GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'){
+    try{
+      for(let i=0; i<STU.length; i++){
+        await fetch(GOOGLE_SCRIPT_URL,{
+          method:'POST',
+          mode:'no-cors',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({action:'addStudent',student:STU[i]})
+        });
+      }
+    }catch(e){console.log('Sync error:',e);}
+  }
+}
 
 // ════════════════════ SIGNATURE HELPERS ════════════════════
 
